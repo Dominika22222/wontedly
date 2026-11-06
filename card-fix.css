@@ -1,0 +1,12 @@
+/* The color names are also used by the hero illustration, where they need offsets.
+   Reset those offsets on the assessment cards so the four cards share a clean grid. */
+.cards .type-card.red,
+.cards .type-card.yellow,
+.cards .type-card.green,
+.cards .type-card.blue {
+  inset: auto;
+  margin: 0;
+  width: 100%;
+  min-width: 0;
+  align-self: stretch;
+}
