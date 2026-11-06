@@ -60,6 +60,18 @@ const profiles = {
         { text: 'Explain the reason behind the urgency, not only the deadline.', signal: 'impact' },
         { text: 'Pause to check whether speed is actually needed.', signal: 'pace' },
         { text: 'Delegate the method as well as the task.', signal: 'ownership' }
+      ] },
+      { prompt: 'What makes you feel most respected when you lead or drive something forward?', options: [
+        { text: 'People trust that I will move things to completion.', signal: 'ownership' },
+        { text: 'People feel the urgency without being overwhelmed by it.', signal: 'pace' },
+        { text: 'People know I am direct but fair.', signal: 'impact' },
+        { text: 'People feel safe enough to challenge me constructively.', signal: 'trust' }
+      ] },
+      { prompt: 'Which image feels most true about your growth edge?', options: [
+        { text: 'I can act with control only when I stop trying to control everything.', signal: 'ownership' },
+        { text: 'I can be stronger when I slow down enough to check the impact of my rhythm.', signal: 'pace' },
+        { text: 'I can be more effective when I lead with less force and more context.', signal: 'impact' },
+        { text: 'I can become more influential when I listen more before I conclude.', signal: 'trust' }
       ] }
     ]
   },
@@ -124,6 +136,18 @@ const profiles = {
         { text: 'Let a difficult conversation be honest, not just pleasant.', signal: 'approval' },
         { text: 'Make room for depth with a few people, not only broad connection.', signal: 'connection' },
         { text: 'Capture new ideas without feeling obliged to pursue each one.', signal: 'novelty' }
+      ] },
+      { prompt: 'What do you usually do when your social energy is high but your practical energy is low?', options: [
+        { text: 'I keep making plans because it feels better than being still.', signal: 'novelty' },
+        { text: 'I lean on people for emotional support and accountability.', signal: 'connection' },
+        { text: 'I resent that I cannot keep up with my own pace.', signal: 'followthrough' },
+        { text: 'I hide the overload and keep the mood positive anyway.', signal: 'approval' }
+      ] },
+      { prompt: 'If someone described your strongest gift in one sentence, what would likely feel most accurate?', options: [
+        { text: 'You make people feel less alone and more possible.', signal: 'connection' },
+        { text: 'You bring excitement and a new angle to what was stuck.', signal: 'novelty' },
+        { text: 'You help people move forward without getting lost in the fear of it.', signal: 'followthrough' },
+        { text: 'You create warmth while helping everyone feel okay.', signal: 'approval' }
       ] }
     ]
   },
@@ -188,6 +212,18 @@ const profiles = {
         { text: 'Saying what I want before I have fully rehearsed it.', signal: 'needs' },
         { text: 'Taking one manageable step toward a change I have delayed.', signal: 'change' },
         { text: 'Offering care without automatically saying yes.', signal: 'boundaries' }
+      ] },
+      { prompt: 'When someone depends on you heavily, what is the most common risk?', options: [
+        { text: 'I start helping in ways that make me feel invisible.', signal: 'needs' },
+        { text: 'I postpone my own discomfort to keep everyone calm.', signal: 'harmony' },
+        { text: 'I become slower to make a needed decision because I am unsure about everyone’s reaction.', signal: 'change' },
+        { text: 'I carry too much of the emotional load without naming it.', signal: 'boundaries' }
+      ] },
+      { prompt: 'What kind of environment helps you feel strongest emotionally?', options: [
+        { text: 'One where people are honest but still kind.', signal: 'harmony' },
+        { text: 'One where my needs matter without being framed as burdensome.', signal: 'needs' },
+        { text: 'One where change is explained and paced with care.', signal: 'change' },
+        { text: 'One where I do not have to perform support in order to be valued.', signal: 'boundaries' }
       ] }
     ]
   },
@@ -252,6 +288,18 @@ const profiles = {
         { text: 'Let one task be solid and complete instead of flawless.', signal: 'standards' },
         { text: 'Name a feeling or need without first proving it is rational.', signal: 'emotion' },
         { text: 'Take a small visible step before I feel completely ready.', signal: 'action' }
+      ] },
+      { prompt: 'When you are solving a problem, how do you know you have enough information?', options: [
+        { text: 'When I can explain the logic in plain language.', signal: 'certainty' },
+        { text: 'When the quality is high enough that I no longer feel uneasy about it.', signal: 'standards' },
+        { text: 'When I understand what the people affected are actually feeling.', signal: 'emotion' },
+        { text: 'When I have enough to move without stalling the whole process.', signal: 'action' }
+      ] },
+      { prompt: 'Which kind of challenge is most likely to make you feel alive and useful?', options: [
+        { text: 'One where the truth matters and I can test my thinking carefully.', signal: 'certainty' },
+        { text: 'One where I can bring a high standard to something meaningful.', signal: 'standards' },
+        { text: 'One where emotional truth and logical clarity can both matter.', signal: 'emotion' },
+        { text: 'One where I can act decisively without drowning in a perfect plan.', signal: 'action' }
       ] }
     ]
   }
