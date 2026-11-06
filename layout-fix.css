@@ -1,0 +1,15 @@
+.type-card.red .section-num {
+  position: relative;
+  left: -6px;
+}
+
+@media (max-width: 760px) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px;
+  }
+
+  .type-card {
+    min-width: 0;
+  }
+}
