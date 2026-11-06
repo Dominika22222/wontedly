@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Reflect on your personality style and discover strengths and practical growth ideas.">
+  <title>Wontedly — personality, with purpose</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top"><a class="brand" href="#home"><span class="mark">w.</span> wontedly</a><a class="nav-link" href="#how">How it works <span>↗</span></a></header>
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy"><p class="eyebrow"><span class="dot"></span> A little more self-understanding</p><h1>Know your color.<br><em>Grow on purpose.</em></h1><p class="intro">Personality isn’t a box. It’s a starting point for understanding what brings out your best—and what you might want to work on.</p><a class="button" href="#check">Find your next insight <span>↓</span></a><p class="note">A few thoughtful questions. Advice that feels personal.</p></div>
+      <div class="color-art" aria-label="Four color personality styles"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="color-center">YOUR<br><b>UNIQUE<br>BLEND</b></div><div class="orb red"><b>RED</b><small>drive</small></div><div class="orb yellow"><b>YELLOW</b><small>energy</small></div><div class="orb green"><b>GREEN</b><small>balance</small></div><div class="orb blue"><b>BLUE</b><small>clarity</small></div></div>
+    </section>
+    <section class="intro-row" id="how"><span class="section-num">01 / THE IDEA</span><p>Choose the color that feels most like you. Then answer questions written for that style to get a reflection on your <b>strengths, habits, and room to grow.</b></p></section>
+    <section class="assessment" id="check"><div class="section-title"><span class="section-num">02 / YOUR CHECK-IN</span><h2>Which color feels like <em>you?</em></h2><p>Pick a starting point. Your answers—not the label—shape your reflection.</p></div>
+      <div class="cards" id="cards"></div>
+      <div class="quiz hidden" id="quiz"><div class="quiz-top"><div><span class="section-num">A REFLECTION, NOT A TEST</span><h3 id="type-title"></h3></div><span class="step" id="step"></span></div><div class="progress"><span id="progress"></span></div><div class="question-box"><p class="section-num">THINK ABOUT YOUR EVERYDAY</p><h3 id="question"></h3><div id="options" class="options"></div></div><div class="quiz-controls"><button class="text-button" id="back">← Back</button><button class="button" id="next" disabled>Next <span>→</span></button></div></div>
+    </section>
+    <section class="result hidden" id="result"><span class="section-num">03 / YOUR REFLECTION</span><h2 id="result-title"></h2><p class="result-lead" id="result-lead"></p><div class="result-columns"><article><span class="result-icon">✳</span><h3>Where you shine</h3><ul id="strengths"></ul></article><article><span class="result-icon">↗</span><h3>Worth noticing</h3><ul id="watchouts"></ul></article><article><span class="result-icon">✦</span><h3>Try this next</h3><ul id="growth"></ul></article></div><p class="disclaimer">Use this as a prompt for self-reflection, not a diagnosis. People are more complex than any color system.</p><button class="text-button" id="again">↺ Start again</button></section>
+    <footer><a class="brand" href="#home"><span class="mark">w.</span> wontedly</a><span>Curiosity first. Growth always.</span></footer>
+  </main><script src="app.js"></script>
+</body></html>
