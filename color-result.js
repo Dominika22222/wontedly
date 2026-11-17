@@ -1,8 +1,8 @@
 const colorSwatches = {
-  Red: '#f16c5b',
-  Yellow: '#e6bf52',
-  Green: '#82ae79',
-  Blue: '#79a7cf'
+  Red: '#a93d34',
+  Yellow: '#b28a2b',
+  Green: '#4c6d59',
+  Blue: '#3d6a8c'
 };
 
 const resultSection = document.getElementById('finder-result');
