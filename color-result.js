@@ -19,14 +19,14 @@ function renderMainColor() {
     const name = row.querySelector('.score-label strong')?.textContent.trim();
     const score = Number(row.querySelector('.score-number')?.textContent.split('/')[0].trim());
     const trait = row.querySelector('.score-label span')?.textContent.trim();
-    return { name, score, trait };
+    return { name, score, trait, row };
   }).filter(item => item.name && Number.isFinite(item.score));
   if (!ranked.length) return;
 
   const highestScore = Math.max(...ranked.map(item => item.score));
   const leaders = ranked.filter(item => item.score === highestScore);
-  const resultCard = resultSection;
-  resultCard.style.setProperty('--result-color', colorSwatches[leaders[0].name] || '#b84438');
+  const primaryColor = colorSwatches[leaders[0].name] || '#b84438';
+  resultSection.style.setProperty('--result-color', primaryColor);
 
   let highlight = document.getElementById('main-color-highlight');
   if (!highlight) {
@@ -41,4 +41,8 @@ function renderMainColor() {
   const traits = leaders.map(item => item.trait).join(' · ');
   highlight.innerHTML = `<span class="main-color-kicker">${isBlend ? 'YOUR LEADING COLORS' : 'YOUR MAIN COLOR'}</span><strong class="main-color-name">${heading}</strong><span class="main-color-trait">${traits}</span>`;
   resultSection.classList.toggle('has-color-blend', isBlend);
+
+  const resultHeading = document.getElementById('result-heading');
+  resultHeading.style.color = primaryColor;
+  ranked.forEach(item => item.row.classList.toggle('is-leading-color', item.score === highestScore));
 }
