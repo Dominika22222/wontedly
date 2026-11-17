@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Not sure which personality color fits you? Take our 40-question color finder for a reflective starting point.">
+  <title>Find Your Color — Wontedly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="color-test.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html"><span class="mark">w.</span> wontedly</a>
+    <a class="nav-link" href="index.html#how">How it works <span>↗</span></a>
+  </header>
+  <main class="finder" id="home">
+    <section class="finder-intro">
+      <span class="section-num">A 40-QUESTION COLOR FINDER</span>
+      <h1>Find a color to <em>start with.</em></h1>
+      <p>Answer based on what you usually do, not what you think is ideal. There are no right or wrong answers. Your result is a reflection prompt—not a diagnosis or a fixed label—and you may see yourself in more than one color.</p>
+      <button class="button" id="begin" type="button">Begin the check-in <span>↓</span></button>
+      <p class="finder-note">40 questions · About 5–8 minutes · Your answers stay in this browser</p>
+    </section>
+
+    <section class="finder-quiz hidden" id="finder-quiz" aria-live="polite">
+      <div class="finder-quiz-top">
+        <div><span class="section-num">YOUR COLOR CHECK-IN</span><h2 id="question-number">Question 1 of 40</h2></div>
+        <span class="finder-percent" id="percent">0%</span>
+      </div>
+      <div class="finder-progress" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="40" aria-valuenow="0"><span id="progress-fill"></span></div>
+      <h3 class="finder-prompt" id="prompt"></h3>
+      <p class="finder-hint">Choose the response that feels most like your usual self.</p>
+      <div class="finder-options" id="options"></div>
+      <div class="finder-controls">
+        <button class="text-button" id="previous" type="button">← Previous</button>
+        <button class="button" id="continue" type="button" disabled>Next <span>→</span></button>
+      </div>
+    </section>
+
+    <section class="finder-result hidden" id="finder-result" aria-live="polite">
+      <span class="section-num">YOUR REFLECTION</span>
+      <h2 id="result-heading">Your color starting point</h2>
+      <p id="result-copy"></p>
+      <div class="score-list" id="score-list"></div>
+      <p class="finder-note">This is a self-reflection tool, not a scientific assessment. People are complex, and these color styles can’t capture everything about you.</p>
+      <div class="finder-result-actions"><button class="button" id="retake" type="button">Take it again <span>↺</span></button><a class="text-button" href="index.html#check">Explore the color reflections →</a></div>
+    </section>
+    <footer><a class="brand" href="index.html"><span class="mark">w.</span> wontedly</a><span>Curiosity first. Growth always.</span></footer>
+  </main>
+  <script src="color-test.js"></script>
+</body>
+</html>
