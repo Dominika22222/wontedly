@@ -2,11 +2,22 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    if (url.pathname === '/api/status') {
+      return jsonResponse({
+        ok: true,
+        chat: Boolean(env.OPENROUTER_API_KEY),
+        openrouterKeyConfigured: Boolean(env.OPENROUTER_API_KEY)
+      });
+    }
+
     if (url.pathname === '/api/chat') {
       if (request.method === 'OPTIONS') {
         return new Response(null, {
           status: 204,
-          headers: { 'Allow': 'POST, OPTIONS' }
+          headers: {
+            'Allow': 'POST, OPTIONS',
+            'Cache-Control': 'no-store'
+          }
         });
       }
 
@@ -26,9 +37,14 @@ export default {
 };
 
 async function handleChat(request, env) {
-  const apiKey = env.OPENROUTER_API_KEY?.trim();
+  const apiKey = typeof env.OPENROUTER_API_KEY === 'string'
+    ? env.OPENROUTER_API_KEY.trim()
+    : '';
+
   if (!apiKey) {
-    return jsonResponse({ error: 'OPENROUTER_API_KEY is not configured in the Worker' }, 500);
+    return jsonResponse({
+      error: 'OPENROUTER_API_KEY is not bound to this production deployment'
+    }, 500);
   }
 
   let body;
@@ -74,7 +90,9 @@ async function handleChat(request, env) {
       })
     });
   } catch (error) {
-    return jsonResponse({ error: `Could not reach OpenRouter: ${error.message || 'network error'}` }, 502);
+    return jsonResponse({
+      error: `Could not reach OpenRouter: ${error.message || 'network error'}`
+    }, 502);
   }
 
   if (!response.ok) {
@@ -82,9 +100,11 @@ async function handleChat(request, env) {
     let providerMessage = providerText;
     try {
       const providerJson = JSON.parse(providerText);
-      providerMessage = providerJson?.error?.message || providerJson?.error || providerText;
+      providerMessage = providerJson?.error?.message
+        || providerJson?.error
+        || providerText;
     } catch {
-      // Keep the provider's plain-text response.
+      // Preserve plain-text provider errors.
     }
 
     return jsonResponse({
@@ -92,7 +112,13 @@ async function handleChat(request, env) {
     }, 502);
   }
 
-  const result = await response.json();
+  let result;
+  try {
+    result = await response.json();
+  } catch {
+    return jsonResponse({ error: 'OpenRouter returned unreadable JSON' }, 502);
+  }
+
   const reply = result?.choices?.[0]?.message?.content;
   if (!reply) {
     return jsonResponse({ error: 'OpenRouter returned no assistant reply' }, 502);
@@ -104,6 +130,9 @@ async function handleChat(request, env) {
 function jsonResponse(data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
-    headers: { 'Content-Type': 'application/json' }
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-store'
+    }
   });
 }
