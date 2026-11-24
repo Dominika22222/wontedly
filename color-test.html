@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="color-test.css">
   <link rel="stylesheet" href="color-result.css">
+  <link rel="stylesheet" href="ai-assistant.css">
 </head>
 <body>
   <header class="top">
@@ -47,11 +48,27 @@
       <p id="result-copy"></p>
       <div class="score-list" id="score-list"></div>
       <p class="finder-note">This is a self-reflection tool, not a scientific assessment. People are complex, and these color styles can’t capture everything about you.</p>
+
+      <section class="ai-assistant" id="ai-assistant" aria-labelledby="ai-assistant-title">
+        <div class="ai-assistant-heading">
+          <span class="section-num">COLOR GUIDE</span>
+          <h3 id="ai-assistant-title">Ask about your result</h3>
+        </div>
+        <div class="ai-messages" id="ai-messages" aria-live="polite"></div>
+        <form class="ai-compose" id="ai-form">
+          <label class="sr-only" for="ai-message">Message the color guide</label>
+          <textarea id="ai-message" rows="2" maxlength="500" placeholder="Ask a reflection question…"></textarea>
+          <button class="button" id="ai-send" type="submit">Send <span>→</span></button>
+        </form>
+        <p class="ai-disclaimer">For reflection only. It does not diagnose or provide medical or psychological advice.</p>
+      </section>
+
       <div class="finder-result-actions"><button class="button" id="retake" type="button">Take it again <span>↺</span></button><a class="button" href="index.html#check">Explore the color reflections <span>→</span></a></div>
     </section>
     <footer><a class="brand" href="index.html"><span class="mark">w.</span> wontedly</a><span>Curiosity first. Growth always.</span></footer>
   </main>
   <script src="color-test.js"></script>
   <script src="color-result.js"></script>
+  <script src="ai-assistant.js"></script>
 </body>
 </html>
