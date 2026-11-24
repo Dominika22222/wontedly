@@ -26,8 +26,9 @@ export default {
 };
 
 async function handleChat(request, env) {
-  if (!env.OPENROUTER_API_KEY) {
-    return jsonResponse({ error: 'OPENROUTER_API_KEY is not configured' }, 500);
+  const apiKey = env.OPENROUTER_API_KEY?.trim();
+  if (!apiKey) {
+    return jsonResponse({ error: 'OPENROUTER_API_KEY is not configured in the Worker' }, 500);
   }
 
   let body;
@@ -47,43 +48,54 @@ async function handleChat(request, env) {
 
   const resultContext = JSON.stringify(body.context ?? {}).slice(0, 6000);
 
-  const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${env.OPENROUTER_API_KEY}`,
-      'Content-Type': 'application/json',
-      'HTTP-Referer': 'https://wontedly-site.pages.dev',
-      'X-Title': 'Wontedly Color Guide'
-    },
-    body: JSON.stringify({
-      model: 'openrouter/auto',
-      messages: [
-        {
-          role: 'system',
-          content: 'You are a thoughtful, concise Wontedly color-guide assistant. The test is reflective, not a scientific diagnosis or mental-health assessment. Never diagnose or make strong psychological claims.'
-        },
-        {
-          role: 'user',
-          content: `The user's color-test result context is: ${resultContext}\n\nUser question: ${message}`
-        }
-      ],
-      max_tokens: 500
-    })
-  });
+  let response;
+  try {
+    response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': 'https://wontedly-site.dominika-sobczak.workers.dev',
+        'X-Title': 'Wontedly Color Guide'
+      },
+      body: JSON.stringify({
+        model: 'openrouter/auto',
+        messages: [
+          {
+            role: 'system',
+            content: 'You are a thoughtful, concise Wontedly color-guide assistant. The test is reflective, not a scientific diagnosis or mental-health assessment. Never diagnose or make strong psychological claims.'
+          },
+          {
+            role: 'user',
+            content: `The user's color-test result context is: ${resultContext}\n\nUser question: ${message}`
+          }
+        ],
+        max_tokens: 500
+      })
+    });
+  } catch (error) {
+    return jsonResponse({ error: `Could not reach OpenRouter: ${error.message || 'network error'}` }, 502);
+  }
 
   if (!response.ok) {
-    const providerText = await response.text();
+    let providerText = await response.text();
+    let providerMessage = providerText;
+    try {
+      const providerJson = JSON.parse(providerText);
+      providerMessage = providerJson?.error?.message || providerJson?.error || providerText;
+    } catch {
+      // Keep the provider's plain-text response.
+    }
+
     return jsonResponse({
-      error: 'The AI provider returned an error',
-      status: response.status,
-      provider: providerText.slice(0, 500)
+      error: `OpenRouter rejected the request (${response.status}): ${String(providerMessage).slice(0, 500)}`
     }, 502);
   }
 
   const result = await response.json();
   const reply = result?.choices?.[0]?.message?.content;
   if (!reply) {
-    return jsonResponse({ error: 'The AI provider returned no reply' }, 502);
+    return jsonResponse({ error: 'OpenRouter returned no assistant reply' }, 502);
   }
 
   return jsonResponse({ reply });
